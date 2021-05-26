@@ -41,13 +41,18 @@ function draw() {
 
   //write code to read fedtime value from the database 
   var time =database.ref("Dog Feed/FeedTime");
-    time.on("value",readoperation,showError);
+    time.on("value",function(data){
+      lastFed=data.val();
+    })
  
   //write code to display text lastFed time here
-  if(lastfeed>=12){
-
-  }else if(lastfeed==0){
+  textSize(15);
+  if(lastFed>=12){
+  text("Last Feed :"+ lastFed%12+"PM",350,30);
+  }else if(lastFed==0){
     text("Last Feed : 12 AM",350,30)
+  }else{
+    text("Last Feed :"+ lastFed + "AM",350,30)
   }
  
   drawSprites();
